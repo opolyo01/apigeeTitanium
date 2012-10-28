@@ -1,0 +1,30 @@
+Usage:
+//Example for adding username to User collection
+Usergrid.ApiClient.init('orgName', 'appName');
+var Usergrid = require("lib/usergrid").Usergrid;
+var message = new Usergrid.Entity('users');
+message.set({"username": userTextFieldVal});
+message.save(
+	function(){},
+	function(){}
+);
+
+//Example for retrieving from User collection
+var Usergrid = require("lib/usergrid").Usergrid;
+Usergrid.ApiClient.runAppQuery (new Usergrid.Query('GET', 'users', null, null,
+	function(response) {
+    	entities = response.entities;
+    	createTable(entities);
+    },
+    function (response) {
+        //do something with the return error value "output" here 
+    }
+));
+
+
+Key Changes to the default html5 library
+
+- Removing window object from code
+- Fixed one scope issue by changing self to this
+- Titanium specific XHR creation (var xhr =  Ti.Network.createHTTPClient ({});)
+- Adding common.js module structure by exposing Usergrid class (exports.Usergrid = Usergrid;)
